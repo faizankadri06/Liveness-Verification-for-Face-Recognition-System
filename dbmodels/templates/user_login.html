@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="static/style.css">
+  </head>
+  <body>
+    <h1>User Login Page</h1>
+    <form action="admin_dash/" method="post" id="user section">{%csrf_token%}
+      <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username1" name="username" required>
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password1" name="password" required>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    
+    <h1>Admin Login Page</h1>
+    <form action="Dashboard/" method="post">{%csrf_token%}
+        <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    <script src="static/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Page</title>
+</head>
+<body>
+
+    <img id="video-feed">
+    <button onclick="goBack()">Back</button>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+        var video = document.getElementById("video-feed");
+        video.src = "{% url 'video_feed' %}";
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    #dashboard {
+      display: flex;
+      flex-direction: row;
+    }
+    #user-details {
+      flex: 1;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    #user-details h2 {
+      font-size: 24px;
+      margin-top: 0;
+    }
+    #user-details p {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+    #user-details ul {
+      list-style: none;
+      padding: 0;
+    }
+    #user-details li {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    #graph {
+      flex: 2;
+      padding: 20px;
+      background-color: #fff;
+    }
+    #graph h2 {
+      font-size: 24px;
+      margin-top: 0;
+    }
+    .punch {
+      font-family: Arial, sans-serif;
+      text-align: right;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      margin: 20px;
+      background-color:#4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3e8e41;
+    }
+  </style>
+</head>
+<body>
+  <div id="dashboard">
+    <div id="user-details">
+      <h2>User Details</h2>
+      {% for item in mymembers %}
+      <ol style = "list-style-type: none;">
+        <li><strong>ID : </strong> <tr><td>{{item.uid}}</td></tr></li>
+        <li><strong>NAME : </strong> <tr><td>{{item.name}}</td></tr></li>
+        <li><strong>E-MAIL : </strong> <tr><td>{{item.email}}</td></tr></li>
+        <li><strong>CONTACT : </strong> <tr><td>{{item.phone}}</td></tr></li>
+      </ol>
+      {% endfor %}
+
+
+      <a href="{% url 'punch' %}"><button>Punch in </button></a>
+
+      <button id="punch-out"><a href="">Punch Out</a></button>
+    </div>
+    <div id="graph">
+      <h2>Line Chart</h2>
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>
+
+  <script>
+    // Set up the data for the line chart
+    var data = {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      datasets: [{
+        label: "Sales",
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "rgba(255, 99, 132, 1)",
+        borderWidth: 2,
+        data: [10, 20, 30, 25, 15, 35, 40],
+      }]
+    };
+
+    // Set up the options for the line chart
+    var options = {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    };
+
+    // Create the line chart
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: data,
+      options: options
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Webcam Stream</title>
+</head>
+<body>
+    <video id="video" width="640" height="480" autoplay></video>
+    <button onclick="goBack()">Back</button>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+        var video = document.getElementById("video");
+        var eventSource = new EventSource("{% url 'stream_video' %}");
+        eventSource.onmessage = function(event) {
+            video.src = "data:image/jpeg;base64," + event.data;
+        };
+        eventSource.onerror = function(event) {
+            console.log("EventSource error: " + event);
+            eventSource.close();
+        };
+    </script>
+</body>
+</html>
